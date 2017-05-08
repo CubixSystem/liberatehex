@@ -1,7 +1,7 @@
 {
-  "name": "art",
+  "name": "liberatehex",
   "version": "0.1.0",
-  "description": "",
+  "description": "Hexagon-based game engine",
   "main": "./build/app.js",
   "scripts": {
     "debug": "node --inspect ./build/app.js",
@@ -11,7 +11,7 @@
     "webpack": "tsc --project ./src/helper.tsconfig.json && webpack --watch --config ./src/frontend/webpack.config.js"
   },
   "author": "Kurochkin Oleg",
-  "license": "ISC",
+  "license": "GNU GPLv3",
   "dependencies": {
     "co-views": "^2.1.0",
     "koa": "^2.2.0",
