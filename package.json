@@ -1,0 +1,48 @@
+{
+  "name": "art",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./build/app.js",
+  "scripts": {
+    "debug": "node --inspect ./build/app.js",
+    "start": "node-dev ./build/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tslint --project ./src/app && tsc --watch --project ./src/app",
+    "webpack": "tsc --project ./src/helper.tsconfig.json && webpack --watch --config ./src/frontend/webpack.config.js"
+  },
+  "author": "Kurochkin Oleg",
+  "license": "ISC",
+  "dependencies": {
+    "co-views": "^2.1.0",
+    "koa": "^2.2.0",
+    "koa-static": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/copy-webpack-plugin": "^4.0.0",
+    "@types/easystarjs": "^0.1.29",
+    "@types/koa-static": "^2.0.22",
+    "@types/koa": "^2.0.39",
+    "@types/node": "^7.0.18",
+    "@types/react-dom": "^15.5.0",
+    "@types/react": "^15.0.24",
+    "@types/webpack": "^2.2.15",
+    "babylonjs": "^3.0.0-alpha",
+    "chroma-js": "^1.3.3",
+    "copy-webpack-plugin": "^4.0.1",
+    "easystarjs": "^0.4.1",
+    "expose-loader": "^0.7.3",
+    "extract-loader": "^0.1.0",
+    "fast-simplex-noise": "^3.2.0",
+    "file-loader": "^0.11.1",
+    "html-loader": "^0.4.5",
+    "node-dev": "^3.1.3",
+    "react-dom": "^15.5.4",
+    "react": "^15.5.4",
+    "source-map-loader": "^0.2.1",
+    "ts-loader": "^2.0.3",
+    "tslint-loader": "^3.5.3",
+    "tslint": "^5.2.0",
+    "typescript": "^2.3.2",
+    "webpack": "^2.5.1"
+  }
+}

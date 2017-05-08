@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+  </head>
+  <body>
+    <style>
+      @font-face {
+        font-family: 'Microfont';
+        src: url('./fonts/04b-03.ttf');
+      }
+
+      body {
+        margin: 0 auto;
+        background-color: black;
+      }
+
+      canvas {
+        /*outline: #333333 1px dotted;*/
+        /*background-color: #597DCE;*/
+        /*background-color: #140C1C;
+        cursor: none;*/
+      }
+    </style>
+
+      <!-- <div id="example"></div> -->
+      <!-- <canvas id="canvas" width="777" height="595"></canvas> -->
+      <!-- <canvas id="canvas" width="1600" height="896"></canvas> -->
+      <canvas id="renderCanvas" width="750" height="500"></canvas>
+
+      <div id="example"></div>
+
+      <!-- Vendor -->
+      <script src="/js/vendor.bundle.js"></script>
+      <script src="/assets/js/babylon.objFileLoader.min.js"></script>
+
+      <!-- Main -->
+      <script src="/js/bundle.js"></script>
+  </body>
+</html>

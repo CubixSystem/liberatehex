@@ -1,0 +1,7 @@
+{
+  "extends": "./base.tsconfig",
+  "include": [
+    "frontend/webpack.config.ts",
+    "scripts/*.ts"
+  ]
+}

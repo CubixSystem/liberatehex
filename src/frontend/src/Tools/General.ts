@@ -1,0 +1,5 @@
+export class General {
+  public static getRandomArbitrary(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+}

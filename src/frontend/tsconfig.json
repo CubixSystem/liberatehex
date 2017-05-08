@@ -1,0 +1,10 @@
+{
+  "extends": "../base.tsconfig",
+  "compilerOptions": {
+    "inlineSourceMap": true,
+    "jsx": "react",
+    "outDir": "../../public",
+    "rootDir": "./",
+    "sourceRoot": "./src/frontend"
+  }
+}

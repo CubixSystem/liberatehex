@@ -1,0 +1,7 @@
+node_modules
+build
+public
+tags*
+src/frontend/webpack.config.js
+src/frontend/temp
+src/scripts/*.js

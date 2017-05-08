@@ -1,0 +1,9 @@
+{
+  "extends": "../base.tsconfig",
+  "compilerOptions": {
+    "inlineSourceMap": true,
+    "outDir": "../../build",
+    "rootDir": "./",
+    "sourceRoot": "./src/app"
+  }
+}
