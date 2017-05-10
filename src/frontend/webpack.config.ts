@@ -9,22 +9,25 @@ module.exports = {
   // NOTE ./ - project root directory
   entry: {
     bundle: './src/frontend',
-    vendor: [ 'babylonjs', 'react', 'react-dom' ]
+    vendor: [ 'babylonjs', 'react', 'react-dom', 'jquery', 'jquery.terminal' ]
   },
 
   module: {
     rules: [
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { test: /\.js$/, loader: 'source-map-loader', enforce: 'pre' },
-      { test: /\.ts$/, loader: 'tslint-loader', enforce: 'pre' },
+      { test: /\.tsx?$/, loader: 'tslint-loader', enforce: 'pre' },
 
       // General files
       { test: /\.tsx?$/, loader: 'ts-loader' },
+      { test: /\.css?$/, loader: 'style-loader' },
+      { test: /\.css?$/, loader: 'css-loader' },
       { test: /\.html$/, loader: 'file-loader?name=[name].[ext]!extract-loader!html-loader' },
 
       { test: require.resolve('babylonjs'), loader: 'expose-loader?BABYLON' },
-      { test: require.resolve('react'), loader: 'expose-loader?React' },
-      { test: require.resolve('react-dom'), loader: 'expose-loader?ReactDOM' }
+      { test: require.resolve('jquery'), loader: 'expose-loader?jQuery' },
+      { test: require.resolve('react-dom'), loader: 'expose-loader?ReactDOM' },
+      { test: require.resolve('react'), loader: 'expose-loader?React' }
     ]
   },
 
@@ -46,7 +49,6 @@ module.exports = {
   ],
 
   resolve: {
-    // Add '.ts' as resolvable extensions.
     extensions: [ '.webpack.js', '.web.js', '.ts', '.js', '.tsx' ]
   }
 };
