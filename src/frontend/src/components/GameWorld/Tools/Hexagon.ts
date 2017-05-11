@@ -52,4 +52,18 @@ export class Hexagon {
       Hexagon.cubeRound(
         Hexagon.axialToCube(hex)));
   }
+
+  public static hexToPoint(hex: BABYLON.Vector2, hexSize: number) {
+    const x = hexSize * Math.sqrt(3) * (hex.x + hex.y / 2);
+    const y = hexSize * 3 / 2 * hex.y;
+
+    return new BABYLON.Vector2(x, y);
+  }
+
+  public static pointToHex(point: BABYLON.Vector2, hexSize: number) {
+    const q = (point.x * Math.sqrt(3) / 3 - point.y / 3) / hexSize;
+    const r = point.y * 2 / 3 / hexSize;
+
+    return Hexagon.hexRound(new BABYLON.Vector2(q, r));
+  }
 }
