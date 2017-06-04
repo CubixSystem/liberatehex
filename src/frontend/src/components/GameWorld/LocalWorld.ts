@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 
-import {HexagonalTile} from './Tile';
+import { HexagonalTile } from './Map';
 
 export interface ILocalWorldParams {
   daytime: Date;

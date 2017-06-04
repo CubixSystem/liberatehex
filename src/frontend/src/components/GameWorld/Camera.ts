@@ -18,7 +18,7 @@ export default class Camera {
 
     this.arcRotateCamera = new BABYLON.ArcRotateCamera(
       'ArcRotateCamera',
-      Math.PI / 6, Math.PI / 2 - 0.463646716, 1000,
+      0, Math.PI / 2 - 0.463646716, 1000,
       BABYLON.Vector3.Zero(), this.scene);
     this.arcRotateCamera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
 
@@ -36,11 +36,11 @@ export default class Camera {
 
     // camera.wheelPrecision = 0;
 
-    const cameraDistance = 124 * 1;
+    const cameraDistance = 62;
     this.arcRotateCamera.orthoTop = cameraDistance * this.canvas.height / 100;
     this.arcRotateCamera.orthoBottom = -1 * cameraDistance * this.canvas.height / 100;
-    this.arcRotateCamera.orthoLeft = -1 * cameraDistance *  this.canvas.width / 100;
-    this.arcRotateCamera.orthoRight = cameraDistance *  this.canvas.width / 100;
+    this.arcRotateCamera.orthoLeft = -1 * cameraDistance * this.canvas.width / 100;
+    this.arcRotateCamera.orthoRight = cameraDistance * this.canvas.width / 100;
 
     this.arcRotateCamera.attachControl(this.canvas, false, false);
   }

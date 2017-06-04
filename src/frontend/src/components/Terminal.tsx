@@ -4,6 +4,7 @@ import * as jQuery from 'jquery';
 import 'jquery.terminal';
 import 'jquery.terminal/css/jquery.terminal.min.css';
 import * as React from 'react';
+// import {style} from 'typestyle';
 
 export class Terminal extends React.Component<object, void> {
   protected terminal: HTMLElement;
@@ -11,13 +12,13 @@ export class Terminal extends React.Component<object, void> {
   protected terminalHeader: HTMLElement;
 
   public render() {
-    return  <div ref={(element) => this.terminal = element}>
-              <div ref={(element) => this.terminalContent = element}></div>
-              <div ref={(element) => this.terminalHeader = element}></div>
-            </div>;
+    return <div ref={(element) => this.terminal = element}>
+      <div ref={(element) => this.terminalContent = element}></div>
+      <div ref={(element) => this.terminalHeader = element}></div>
+    </div>;
   }
 
-  protected componentDidMount() {
+  public componentDidMount() {
     jQuery(this.terminalContent).terminal(
       (command: string, term: any) => {
         if (command !== '') {
@@ -29,7 +30,7 @@ export class Terminal extends React.Component<object, void> {
       },
       {
         greetings: 'Javascript Interpreter',
-        height: 200,
+        height: 170,
         name: 'js_demo',
         prompt: 'js> ',
         width: 450

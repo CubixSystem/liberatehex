@@ -18,27 +18,30 @@ export default class AssetsManager {
       const assetsPath = '/assets/models/';
       let meshesPool: BABYLON.AbstractMesh[] = [];
 
-      BABYLON.SceneLoader.ImportMesh(
-        '', `${assetsPath}Cube/`, 'Cube.babylon', this.scene,
-        (meshes: BABYLON.Mesh[]) => {
-          meshes[0].rotate(new BABYLON.Vector3(0, 1, 0),  Math.PI + Math.PI / 6, BABYLON.Space.WORLD);
-          meshes[0].position.y += 60;
-
-          let bot: BABYLON.InstancedMesh;
-          for (let z = 0; z < 10; z++ ) {
-            for (let x = 0; x < 10; x++ ) {
-              bot = meshes[0].createInstance('bot');
-              bot.position = new BABYLON.Vector3(x * 96, 60, z * 96);
-            }
-          }
-          // meshes[0].scaling = new BABYLON.Vector3(2, 2, 2);
-          // meshes[0].scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
-          // meshes[0].scaling = new BABYLON.Vector3(2, 2, 2);
-          // console.log(meshes);
-          // const size = meshes[0].getBoundingInfo().boundingBox.extendSize;
-          // console.log(size);
-          meshesPool = meshesPool.concat(meshes);
-        });
+      // BABYLON.SceneLoader.ImportMesh(
+      //   '', `${assetsPath}Cube/`, 'Cube.babylon', this.scene,
+      //   (meshes: BABYLON.Mesh[]) => {
+      //     meshes[0].rotate(new BABYLON.Vector3(0, 1, 0),  Math.PI + Math.PI / 6, BABYLON.Space.WORLD);
+      //     // meshes[0].position.y += 60;
+      //     meshes[0].setEnabled(false);
+      //
+      //     let bot: BABYLON.InstancedMesh;
+      //     for (let z = 0; z < 10; z++ ) {
+      //       for (let x = 0; x < 10; x++ ) {
+      //         bot = meshes[0].createInstance('bot');
+      //         // bot.scaling = new BABYLON.Vector3(2, 2, 2);
+      //         // bot.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
+      //         bot.position = new BABYLON.Vector3(x * 48 * 2, 0, z * 48 * 2);
+      //       }
+      //     }
+      //     // meshes[0].scaling = new BABYLON.Vector3(2, 2, 2);
+      //     // meshes[0].scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
+      //     // meshes[0].scaling = new BABYLON.Vector3(2, 2, 2);
+      //     // console.log(meshes);
+      //     // const size = meshes[0].getBoundingInfo().boundingBox.extendSize;
+      //     // console.log(size);
+      //     meshesPool = meshesPool.concat(meshes);
+      //   });
 
       // BABYLON.SceneLoader.ImportMesh(
       //   '', `${assetsPath}Rifle/`, 'Rifle.babylon', this.scene,

@@ -1,12 +1,12 @@
 import * as BABYLON from 'babylonjs';
+import * as HexTools from 'hex-tools';
 
 import AssetsManager from './AssetsManager';
 import Camera from './Camera';
 import {
-  GroundTileFactory,
-  HexagonalTile,
-  TileType
-} from './Tile';
+  HexagonMap,
+  TerraformTools
+} from './Map';
 
 export class Game {
   private canvas: HTMLCanvasElement;
@@ -15,7 +15,7 @@ export class Game {
   private camera: Camera;
   private light: BABYLON.Light;
   private assetsManager: AssetsManager;
-  private groundTileFactory: GroundTileFactory;
+  private map: HexagonMap;
   // private cellShadingMaterial: BABYLON.ShaderMaterial;
 
   constructor(canvas: HTMLCanvasElement) {
@@ -26,7 +26,6 @@ export class Game {
 
   public createScene() {
     this.scene = new BABYLON.Scene(this.engine);
-    this.groundTileFactory = new GroundTileFactory({scene: this.scene});
     this.assetsManager = new AssetsManager(this.scene);
 
     this.initCamera();
@@ -46,17 +45,105 @@ export class Game {
       const zAxis = BABYLON.Mesh.CreateLines(
         'z', [worldOrigin, (BABYLON.Axis.Z).scale(size)], this.scene);
 
+      const qAxis = BABYLON.Mesh.CreateLines(
+        'q', [worldOrigin, (BABYLON.Axis.Z).scale(size * 50)], this.scene);
+      const rAxis = BABYLON.Mesh.CreateLines(
+        'r', [worldOrigin, (new BABYLON.Vector3(41.569, 0, 24).scale(size * 50))], this.scene);
+
       xAxis.color = BABYLON.Color3.Red();
       yAxis.color = BABYLON.Color3.Green();
       zAxis.color = BABYLON.Color3.Blue();
 
-      let tile: HexagonalTile;
-      for (let z = 0; z < 10; z++ ) {
-        for (let x = 0; x < 10; x++ ) {
-          tile = this.groundTileFactory.getTitle(TileType.PLANE);
-          tile.position = new BABYLON.Vector2(x, z);
-        }
-      }
+      qAxis.color = BABYLON.Color3.Magenta();
+      rAxis.color = BABYLON.Color3.Yellow();
+
+      this.map = new HexagonMap({
+        hexagonSize: 24,
+        scene: this.scene,
+        size: { width: 5, height: 5 },
+        type: HexTools.HexagonGridType.TRIANGLE
+      });
+
+      // let tile: HexagonalTile;
+      // const tiles: BABYLON.Mesh[] = [];
+
+      // for (let z = 0; z < 20; z++ ) {
+      //   for (let x = 0; x < 20; x++ ) {
+      //     tile = this.groundTileFactory.getTitle(TileType.PLANE);
+      //     tile.position = new BABYLON.Vector3(x, 0, z);
+      //     tiles.push(tile.meshInstance);
+      //   }
+      // }
+      // const grid = BABYLON.Mesh.MergeMeshes(tiles, true, true);
+      // grid.material.wireframe = true;
+
+      // tile = this.groundTileFactory.getTitle(TileType.PLANE);
+      // tile.position = new BABYLON.Vector2(0, 0);
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE);
+      // tile.position = new BABYLON.Vector2(0, 1);
+
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.NORTH_EAST);
+      // tile.axialPosition = new HexTools.AxialVector(4, 2);
+      // tiles.push(tile.meshInstance);
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.EAST);
+      // tile.axialPosition = new HexTools.AxialVector(3, 1);
+      // tiles.push(tile.meshInstance);
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.SOUTH_EAST);
+      // tile.axialPosition = new HexTools.AxialVector(2, 1);
+      // tiles.push(tile.meshInstance);
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.SOUTH_WEST);
+      // tile.axialPosition = new HexTools.AxialVector(2, 2);
+      // tiles.push(tile.meshInstance);
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.WEST);
+      // tile.axialPosition = new HexTools.AxialVector(2, 3);
+      // tiles.push(tile.meshInstance);
+      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.NORTH_WEST);
+      // tile.axialPosition = new HexTools.AxialVector(3, 3);
+      // tiles.push(tile.meshInstance);
+      // tile = this.groundTileFactory.getTitle(TileType.PLANE, TileDirection.NORTH);
+      // tile.axialPosition = new HexTools.AxialVector(3, 2);
+      // tiles.push(tile.meshInstance);
+
+      // this.grid = BABYLON.Mesh.MergeMeshes(tiles, true, true);
+      // this.grid.material.wireframe = true;
+
+      // const scale = 40;
+      // const ground = BABYLON.Mesh.CreateGround('ground1', 48 * scale, 48 * scale, 2, this.scene);
+      // const material = new BABYLON.StandardMaterial('texture1', this.scene);
+      // const diffuseTexture = new BABYLON.Texture('assets/textures/seamless-hex.jpg', this.scene);
+      //
+      // material.specularColor = new BABYLON.Color3(0, 0, 0);
+      // diffuseTexture.uScale = 0.25 * scale;
+      // diffuseTexture.vScale = 0.25 * scale;
+      // // diffuseTexture.uAng = 0;
+      // // diffuseTexture.vAng = 5.0;
+      //
+      // material.diffuseTexture = diffuseTexture;
+      // ground.material = material;
+      // // ground.material.wireframe = true;
+      // ground.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3, BABYLON.Space.WORLD);
+
+      // const hexagon = BABYLON.MeshBuilder.CreateDisc(
+      //   'hexagon', { radius : 24 * 2, tessellation: 6, updatable: true }, this.scene);
+      // const positionFunction = (positions: [any]) => {
+      //   // modify positions array values here
+      //   // positions[0] = 48;
+      //   // positions[1] = 48;
+      //   // positions[2] -= 24;
+      //   // positions[5] -= 24;
+      //   // positions[8] -= 24;
+      //   positions[11] -= 24;
+      //   positions[14] -= 24;
+      //   console.log(positions);
+      // };
+      // hexagon.updateMeshPositions(positionFunction, true);
+      // const material = new BABYLON.StandardMaterial('texture1', this.scene);
+      // material.specularColor = new BABYLON.Color3(0, 0, 0);
+      // // material.diffuseColor = new BABYLON.Color3(128, 128, 128);
+      // hexagon.material = material;
+      // hexagon.material.wireframe = true;
+      // hexagon.rotate(new BABYLON.Vector3(1, 0, 0), Math.PI / 2, BABYLON.Space.WORLD);
+      // hexagon.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 6, BABYLON.Space.WORLD);
 
       // tile = BABYLON.MeshBuilder.CreatePlane('tile', {height : 80.5, width: 72}, this.scene);
       // tile.position = new BABYLON.Vector3(5 * 72, 8, 5 * 72);
@@ -109,11 +196,31 @@ export class Game {
       this.animate();
     });
 
-    // When click event is raised
     window.addEventListener('click', () => {
-      // We try to pick an object
       const pickResult = this.scene.pick(this.scene.pointerX, this.scene.pointerY);
       if (pickResult.pickedMesh) {
+        // this.grid.markVerticesDataAsUpdatable(BABYLON.VertexBuffer.PositionKind, true);
+        // this.grid.markVerticesDataAsUpdatable(BABYLON.VertexBuffer.NormalKind, true);
+        // this.grid.updateMeshPositions((positions: number[]) => {
+        //   console.log('pickedPoint', pickResult.pickedPoint);
+        //   positions[2] += 50;
+        //   // for (let i = 0; i < positions.length / 3; i++) {
+        //   //   if (Math.round(positions[i]) === Math.round(pickResult.pickedPoint.x)) {
+        //   //   // Math.round(positions[i + 1]) === Math.round(pickResult.pickedPoint.y) &&
+        //   //   // Math.round(positions[i + 2]) === Math.round(pickResult.pickedPoint.z)) {
+        //   //     positions[i] += 100;
+        //   //     // positions[i + 1] += 100;
+        //   //     // positions[i + 2] += 100;
+        //   //   }
+        //   // }
+        // }, true);
+        // this.grid.markVerticesDataAsUpdatable(BABYLON.VertexBuffer.PositionKind, false);
+        // this.grid.markVerticesDataAsUpdatable(BABYLON.VertexBuffer.NormalKind, false);
+
+        const position = this.map.pointToAxial(
+          new HexTools.Point(pickResult.pickedMesh.position.z, pickResult.pickedMesh.position.x));
+        TerraformTools.elevateTile(position, this.map);
+        // TerraformTools.lowerTile(position, this.map);
         // pickResult.pickedMesh.edgesWidth = 4.0;
         // pickResult.pickedMesh.enableEdgesRendering();
       }

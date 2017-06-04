@@ -2,6 +2,7 @@
   "extends": "../base.tsconfig",
   "compilerOptions": {
     "inlineSourceMap": true,
+    "module": "commonjs",
     "outDir": "../../build",
     "rootDir": "./",
     "sourceRoot": "./src/app"

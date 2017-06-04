@@ -5,8 +5,19 @@
   ],
   "jsRules": {},
   "rules": {
-    "quotemark": [true, "single", "avoid-escape"],
-    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "no-var-requires": false
   },
   "rulesDirectory": []
 }
