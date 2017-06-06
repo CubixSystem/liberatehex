@@ -1,13 +1,13 @@
 import * as BABYLON from 'babylonjs';
 import * as HexTools from 'hex-tools';
 
-import { Biome } from './Biome';
-import { HexagonalTile } from './HexagonalTile';
+import { HexagonalTile } from '../Tile';
 import {
   TileDirection,
   TileFactoryManager,
   TileType
-} from './TileFactory';
+} from '../TileFactory';
+import { Biome } from './Biome';
 
 export interface IHexagonMapParams extends HexTools.IHexagonGridParams { scene: BABYLON.Scene; }
 
@@ -24,12 +24,7 @@ export class HexagonMap extends HexTools.PointyTopHexagonGrid {
     }));
   }
 
-  public insertHexagon(tile: HexagonalTile, position: (HexTools.AxialVector | HexTools.CubeVector)) {
-    super.insertHexagon(tile, position);
-    this.updateMeshPosition(position);
-  }
-
-  public setHexagonHeight(position: (HexTools.AxialVector | HexTools.CubeVector), height: number) {
+  public setTileHeight(position: (HexTools.AxialVector | HexTools.CubeVector), height: number) {
     const tile = this.getHexagon(position);
     tile.height = height;
     this.updateMeshPosition(position);
@@ -40,23 +35,34 @@ export class HexagonMap extends HexTools.PointyTopHexagonGrid {
   }
 
   public removeTile(position: (HexTools.AxialVector | HexTools.CubeVector)) {
-    const tile = this.getHexagon(position);
-    tile.meshInstance.dispose();
-    super.removeHexagon(position);
+    this.removeHexagon(position);
   }
 
   public replaceTile(params: {
     type: TileType,
     position: (HexTools.AxialVector | HexTools.CubeVector),
     direction: TileDirection,
-    biome: Biome
+    biome: Biome,
+    height: number
   }) {
     const tile = this.tileFactoryManager.getTile(params);
     super.replaceHexagon(tile, params.position);
+    this.setTileHeight(tile.axialPosition, params.height);
   }
 
   public getHexagon(position: (HexTools.AxialVector | HexTools.CubeVector)) {
     return super.getHexagon(position) as HexagonalTile;
+  }
+
+  public insertHexagon(tile: HexagonalTile, position: (HexTools.AxialVector | HexTools.CubeVector)) {
+    super.insertHexagon(tile, position);
+    this.updateMeshPosition(position);
+  }
+
+  public removeHexagon(position: (HexTools.AxialVector | HexTools.CubeVector)) {
+    const tile = this.getHexagon(position);
+    tile.meshInstance.dispose();
+    super.removeHexagon(position);
   }
 
   protected updateMeshPosition(position: (HexTools.AxialVector | HexTools.CubeVector)) {

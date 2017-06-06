@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as HexTools from 'hex-tools';
 
-import { HexagonalTile } from '../HexagonalTile';
+import { HexagonalTile } from '../Tile';
 
 export interface ITileFactoryParams {
   scene: BABYLON.Scene;
@@ -26,7 +26,7 @@ export enum TileDirection {
   NORTH_WEST
 }
 
-export class TileFactory {
+export abstract class TileFactory {
   protected readonly tileSize: number;
   protected readonly scene: BABYLON.Scene;
   protected readonly meshes: {
@@ -91,10 +91,12 @@ export class TileFactory {
     // }));
 
     return new HexagonalTile({
+      direction,
       height: 0,
       meshInstance: this.getMesh(type, direction),
       position: new HexTools.AxialVector({ q: 0, r: 0 }),
-      size: this.tileSize
+      size: this.tileSize,
+      type
     });
   }
 
@@ -130,18 +132,18 @@ export class TileFactory {
         throw new Error('Wrong direction');
       }
     } else if (type === TileType.SLOPE_UP || type === TileType.SLOPE_DOWN) {
-      if (direction === TileDirection.NORTH_EAST) {
-        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * -2, BABYLON.Space.WORLD);
+      if (direction === TileDirection.NORTH_WEST) {
+        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 4, BABYLON.Space.WORLD);
+      } else if (direction === TileDirection.NORTH_EAST) {
+        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 5, BABYLON.Space.WORLD);
       } else if (direction === TileDirection.EAST) {
-        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * -1, BABYLON.Space.WORLD);
+        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 6, BABYLON.Space.WORLD);
       } else if (direction === TileDirection.SOUTH_EAST) {
-        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 0, BABYLON.Space.WORLD);
+        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 7, BABYLON.Space.WORLD);
       } else if (direction === TileDirection.SOUTH_WEST) {
-        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 1, BABYLON.Space.WORLD);
+        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 8, BABYLON.Space.WORLD);
       } else if (direction === TileDirection.WEST) {
-        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 2, BABYLON.Space.WORLD);
-      } else if (direction === TileDirection.NORTH_WEST) {
-        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 3, BABYLON.Space.WORLD);
+        mesh.rotate(new BABYLON.Vector3(0, 1, 0), Math.PI / 3 * 9, BABYLON.Space.WORLD);
       } else if (direction === TileDirection.NORTH || direction === TileDirection.SOUTH) {
         throw new Error('Wrong direction');
       }

@@ -4,7 +4,7 @@ import * as HexTools from 'hex-tools';
 import AssetsManager from './AssetsManager';
 import Camera from './Camera';
 import {
-  HexagonMap,
+  BiomeMap,
   TerraformTools
 } from './Map';
 
@@ -15,7 +15,7 @@ export class Game {
   private camera: Camera;
   private light: BABYLON.Light;
   private assetsManager: AssetsManager;
-  private map: HexagonMap;
+  private map: BiomeMap;
   // private cellShadingMaterial: BABYLON.ShaderMaterial;
 
   constructor(canvas: HTMLCanvasElement) {
@@ -57,7 +57,7 @@ export class Game {
       qAxis.color = BABYLON.Color3.Magenta();
       rAxis.color = BABYLON.Color3.Yellow();
 
-      this.map = new HexagonMap({
+      this.map = new BiomeMap({
         hexagonSize: 24,
         scene: this.scene,
         size: { width: 5, height: 5 },

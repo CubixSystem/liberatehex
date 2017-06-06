@@ -1,5 +1,4 @@
 export * from './TileFactory';
-export * from './HexagonalTile';
+export * from './Tile';
 export * from './TerraformTools';
-export * from './HexagonMap';
-export * from './Biome';
+export * from './Map';

@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 
-import { Biome } from './../Biome';
+import { Biome } from './../Map';
 import { BiomeTileFactory } from './BiomeTileFactory';
 import * as Texture from './Texture';
 import { TileDirection, TileType } from './TileFactory';
@@ -19,6 +19,7 @@ export class TileFactoryManager {
     this.scene = params.scene;
     this.tileSize = params.tileSize;
     this.factories.set(Biome.TEST, new BiomeTileFactory({
+      biome: Biome.TEST,
       scene: this.scene,
       textures: Texture.Ground,
       tileSize: this.tileSize
