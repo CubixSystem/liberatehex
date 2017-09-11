@@ -10,7 +10,7 @@
     "paths": {
       "@gameComponents": ["components/GameWorld/gameComponents"],
       "@tiles": ["components/GameWorld/tiles"],
-      "@tools": ["components/GameWorld/tools"],
+      "@tools": ["components/GameWorld/tools"]
     }
   }
 }
