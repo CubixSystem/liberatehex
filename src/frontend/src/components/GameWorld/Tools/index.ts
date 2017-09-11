@@ -1,1 +1,2 @@
-export * from './General';
+export * from "./General";
+export * from "./Palette";

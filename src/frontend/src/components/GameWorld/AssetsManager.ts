@@ -1,4 +1,12 @@
-import * as BABYLON from 'babylonjs';
+/* tslint:disable:max-classes-per-file */
+
+import * as BABYLON from "babylonjs";
+
+declare module "babylonjs" {
+  class OBJFileLoader {
+    public static OPTIMIZE_WITH_UV: boolean;
+  }
+}
 
 export default class AssetsManager {
   protected assetsManager: BABYLON.AssetsManager;
@@ -9,14 +17,13 @@ export default class AssetsManager {
     this.assetsManager = new BABYLON.AssetsManager(this.scene);
     this.assetsManager.useDefaultLoadingScreen = false;
 
-    const OBJFileLoader: { OPTIMIZE_WITH_UV: boolean } = BABYLON.OBJFileLoader;
-    OBJFileLoader.OPTIMIZE_WITH_UV = true;
+    BABYLON.OBJFileLoader.OPTIMIZE_WITH_UV = true;
   }
 
   public init() {
     return new Promise((resolve) => {
-      const assetsPath = '/assets/models/';
-      let meshesPool: BABYLON.AbstractMesh[] = [];
+      // const assetsPath = "/assets/models/";
+      const meshesPool: BABYLON.AbstractMesh[] = [];
 
       // BABYLON.SceneLoader.ImportMesh(
       //   '', `${assetsPath}Cube/`, 'Cube.babylon', this.scene,

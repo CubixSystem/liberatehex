@@ -1,10 +1,16 @@
 {
-  "extends": "../../base.tsconfig",
+  "extends": "../../tsconfig",
   "compilerOptions": {
     "inlineSourceMap": true,
     "jsx": "react",
     "outDir": "../../../public",
     "rootDir": "../",
-    "sourceRoot": "./src/frontend"
+    "sourceRoot": "./src/frontend",
+    "baseUrl": ".",
+    "paths": {
+      "@gameComponents": ["components/GameWorld/gameComponents"],
+      "@tiles": ["components/GameWorld/tiles"],
+      "@tools": ["components/GameWorld/tools"],
+    }
   }
 }

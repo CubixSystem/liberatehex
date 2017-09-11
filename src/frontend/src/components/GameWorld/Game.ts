@@ -1,12 +1,10 @@
-import * as BABYLON from 'babylonjs';
-import * as HexTools from 'hex-tools';
+import * as BABYLON from "babylonjs";
+import * as HexTools from "hex-tools";
 
-import AssetsManager from './AssetsManager';
-import Camera from './Camera';
-import {
-  BiomeMap,
-  TerraformTools
-} from './Map';
+import { BiomeMap, TerraformTools } from "gameComponents";
+import AssetsManager from "./AssetsManager";
+import Camera from "./Camera";
+// import { DB32 } from "./Tools/Palette";
 
 export class Game {
   private canvas: HTMLCanvasElement;
@@ -39,16 +37,16 @@ export class Game {
       const worldOrigin = BABYLON.Vector3.Zero();
 
       const xAxis = BABYLON.Mesh.CreateLines(
-        'x', [worldOrigin, (BABYLON.Axis.X).scale(size)], this.scene);
+        "x", [worldOrigin, (BABYLON.Axis.X).scale(size)], this.scene);
       const yAxis = BABYLON.Mesh.CreateLines(
-        'y', [worldOrigin, (BABYLON.Axis.Y).scale(size)], this.scene);
+        "y", [worldOrigin, (BABYLON.Axis.Y).scale(size)], this.scene);
       const zAxis = BABYLON.Mesh.CreateLines(
-        'z', [worldOrigin, (BABYLON.Axis.Z).scale(size)], this.scene);
+        "z", [worldOrigin, (BABYLON.Axis.Z).scale(size)], this.scene);
 
       const qAxis = BABYLON.Mesh.CreateLines(
-        'q', [worldOrigin, (BABYLON.Axis.Z).scale(size * 50)], this.scene);
+        "q", [worldOrigin, (BABYLON.Axis.Z).scale(size * 50)], this.scene);
       const rAxis = BABYLON.Mesh.CreateLines(
-        'r', [worldOrigin, (new BABYLON.Vector3(41.569, 0, 24).scale(size * 50))], this.scene);
+        "r", [worldOrigin, (new BABYLON.Vector3(41.569, 0, 24).scale(size * 50))], this.scene);
 
       xAxis.color = BABYLON.Color3.Red();
       yAxis.color = BABYLON.Color3.Green();
@@ -57,52 +55,33 @@ export class Game {
       qAxis.color = BABYLON.Color3.Magenta();
       rAxis.color = BABYLON.Color3.Yellow();
 
+      // let position = BABYLON.Vector3.Zero();
+      // for (const color in DB32) {
+      //   if (color) {
+      //     const sphere = BABYLON.Mesh.CreateSphere("sphere", 10.0, 10.0, this.scene);
+      //     const material = new BABYLON.StandardMaterial("material01", this.scene);
+      //     material.diffuseColor = BABYLON.Color3.FromHexString(color);
+      //     sphere.scaling = new BABYLON.Vector3(2, 2, 2);
+      //     sphere.material = material;
+      //     sphere.position = position;
+      //     position = position.add(new BABYLON.Vector3(0, 0, 30));
+      //   }
+      // }
+
       this.map = new BiomeMap({
         hexagonSize: 24,
         scene: this.scene,
-        size: { width: 5, height: 5 },
-        type: HexTools.HexagonGridType.TRIANGLE
+        size: { width: 15, height: 15 },
+        type: HexTools.HexagonGridType.TRIANGLE,
       });
 
-      // let tile: HexagonalTile;
-      // const tiles: BABYLON.Mesh[] = [];
-
-      // for (let z = 0; z < 20; z++ ) {
-      //   for (let x = 0; x < 20; x++ ) {
-      //     tile = this.groundTileFactory.getTitle(TileType.PLANE);
-      //     tile.position = new BABYLON.Vector3(x, 0, z);
-      //     tiles.push(tile.meshInstance);
-      //   }
-      // }
-      // const grid = BABYLON.Mesh.MergeMeshes(tiles, true, true);
-      // grid.material.wireframe = true;
-
-      // tile = this.groundTileFactory.getTitle(TileType.PLANE);
-      // tile.position = new BABYLON.Vector2(0, 0);
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE);
-      // tile.position = new BABYLON.Vector2(0, 1);
-
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.NORTH_EAST);
-      // tile.axialPosition = new HexTools.AxialVector(4, 2);
-      // tiles.push(tile.meshInstance);
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.EAST);
-      // tile.axialPosition = new HexTools.AxialVector(3, 1);
-      // tiles.push(tile.meshInstance);
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.SOUTH_EAST);
-      // tile.axialPosition = new HexTools.AxialVector(2, 1);
-      // tiles.push(tile.meshInstance);
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.SOUTH_WEST);
-      // tile.axialPosition = new HexTools.AxialVector(2, 2);
-      // tiles.push(tile.meshInstance);
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.WEST);
-      // tile.axialPosition = new HexTools.AxialVector(2, 3);
-      // tiles.push(tile.meshInstance);
-      // tile = this.groundTileFactory.getTitle(TileType.SLOPE_DOWN, TileDirection.NORTH_WEST);
-      // tile.axialPosition = new HexTools.AxialVector(3, 3);
-      // tiles.push(tile.meshInstance);
-      // tile = this.groundTileFactory.getTitle(TileType.PLANE, TileDirection.NORTH);
-      // tile.axialPosition = new HexTools.AxialVector(3, 2);
-      // tiles.push(tile.meshInstance);
+      // this.map.replaceTile({
+      //   type: ,
+      //   position: ,
+      //   direction: ,
+      //   biome: ,
+      //   height: 0,
+      // });
 
       // this.grid = BABYLON.Mesh.MergeMeshes(tiles, true, true);
       // this.grid.material.wireframe = true;
@@ -196,7 +175,7 @@ export class Game {
       this.animate();
     });
 
-    window.addEventListener('click', () => {
+    window.addEventListener("click", () => {
       const pickResult = this.scene.pick(this.scene.pointerX, this.scene.pointerY);
       if (pickResult.pickedMesh) {
         // this.grid.markVerticesDataAsUpdatable(BABYLON.VertexBuffer.PositionKind, true);
@@ -219,7 +198,8 @@ export class Game {
 
         const position = this.map.pointToAxial(
           new HexTools.Point(pickResult.pickedMesh.position.z, pickResult.pickedMesh.position.x));
-        TerraformTools.elevateTile(position, this.map);
+
+        // TerraformTools.elevateTile(position, this.map);
         // TerraformTools.lowerTile(position, this.map);
         // pickResult.pickedMesh.edgesWidth = 4.0;
         // pickResult.pickedMesh.enableEdgesRendering();
@@ -236,7 +216,7 @@ export class Game {
 
   private initLight() {
     // create a basic light, aiming 0,1,0 - meaning, to the sky
-    this.light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this.scene);
+    this.light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), this.scene);
     // this.light = new BABYLON.PointLight('Omni', new BABYLON.Vector3(20, 3200, 2), this.scene);
   }
 
@@ -261,7 +241,7 @@ export class Game {
     });
 
     // the canvas/window resize event handler
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       this.engine.resize();
     });
   }

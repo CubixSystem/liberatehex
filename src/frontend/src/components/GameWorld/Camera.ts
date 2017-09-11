@@ -1,4 +1,4 @@
-import * as BABYLON from 'babylonjs';
+import * as BABYLON from "babylonjs";
 
 export default class Camera {
   public arcRotateCamera: BABYLON.ArcRotateCamera;
@@ -17,7 +17,7 @@ export default class Camera {
     // 'camera1', new BABYLON.Vector3(0, 150, -140), this.scene);
 
     this.arcRotateCamera = new BABYLON.ArcRotateCamera(
-      'ArcRotateCamera',
+      "ArcRotateCamera",
       0, Math.PI / 2 - 0.463646716, 1000,
       BABYLON.Vector3.Zero(), this.scene);
     this.arcRotateCamera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
@@ -36,7 +36,7 @@ export default class Camera {
 
     // camera.wheelPrecision = 0;
 
-    const cameraDistance = 62;
+    const cameraDistance = 62 / 1.5;
     this.arcRotateCamera.orthoTop = cameraDistance * this.canvas.height / 100;
     this.arcRotateCamera.orthoBottom = -1 * cameraDistance * this.canvas.height / 100;
     this.arcRotateCamera.orthoLeft = -1 * cameraDistance * this.canvas.width / 100;
