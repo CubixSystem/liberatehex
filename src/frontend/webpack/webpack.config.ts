@@ -49,6 +49,9 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: [".ts", ".tsx"],
+    alias: {
+      GameWorld: path.resolve(__dirname, "../src/components/GameWorld"),
+    },
+    extensions: [".ts", ".js", ".tsx"],
   },
 };

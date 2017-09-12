@@ -5,12 +5,13 @@ import {
   BiomeTile,
   ITileFactoryManager,
   TileDirection,
-} from "@gameComponents";
+} from "GameWorld/gameComponents";
 import {
   GroundTileFactoryManager,
+  GroundTileShape,
   TileShape,
   TileType,
- } from "@tiles";
+ } from "GameWorld/tiles";
 import { Biome } from "./Biome";
 
 export interface IHexagonMapParams extends HexTools.IHexagonGridParams { scene: BABYLON.Scene; }
@@ -27,7 +28,7 @@ export class BiomeMap extends HexTools.PointyTopHexagonGrid<BiomeTile> {
     this.generateGrid(() => this.TileFactoryManagers.get(TileType.GROUND)!.getTile({
         biome: Biome.TEST,
         direction: TileDirection.NORTH_EAST,
-        shape: TileShape.PLANE,
+        shape: GroundTileShape.GROUND_PLANE,
       }));
   }
 
@@ -48,7 +49,7 @@ export class BiomeMap extends HexTools.PointyTopHexagonGrid<BiomeTile> {
   }
 
   public replaceTile(params: {
-    type: TileShape,
+    shape: TileShape,
     position: (HexTools.AxialVector | HexTools.CubeVector),
     direction: TileDirection,
     biome: Biome,

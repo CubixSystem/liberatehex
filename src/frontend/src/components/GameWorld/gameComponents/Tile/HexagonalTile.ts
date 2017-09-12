@@ -1,8 +1,8 @@
 import * as BABYLON from "babylonjs";
 import * as HexTools from "hex-tools";
 
-import { TileDirection } from "@gameComponents";
-import { TileShape, TileType } from "@tiles";
+import { TileDirection } from "GameWorld/gameComponents";
+import { TileShape, TileType } from "GameWorld/tiles";
 
 export interface IHexagonalTileParams extends HexTools.IHexagonParams {
   meshInstance: BABYLON.InstancedMesh | BABYLON.Mesh;

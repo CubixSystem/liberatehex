@@ -5,9 +5,9 @@ import {
   Biome,
   ITileTexture,
   TileDirection,
-} from "@gameComponents";
-import { RailTile, TileType } from "@tiles";
-import * as Tools from "@tools";
+} from "GameWorld/gameComponents";
+import { RailTile, TileType } from "GameWorld/tiles";
+import * as Tools from "GameWorld/Tools";
 
 export interface IRailTileFactoryParams {
   scene: BABYLON.Scene;

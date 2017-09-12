@@ -1,4 +1,4 @@
-import { BiomeTile, IBiomeTileParams } from "gameComponents/Tile";
+import { BiomeTile, IBiomeTileParams } from "GameWorld/gameComponents";
 
 // export interface IGroundTileParams extends IBiomeTileParams {}
 

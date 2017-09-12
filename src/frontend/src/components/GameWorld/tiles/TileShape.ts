@@ -1,4 +1,4 @@
-import { GroundTileShape } from "tiles/Ground";
-import { RailTileShape } from "tiles/Rail";
+import { GroundTileShape } from "GameWorld/tiles";
+import { RailTileShape } from "GameWorld/tiles";
 
 export type TileShape = (GroundTileShape | RailTileShape);

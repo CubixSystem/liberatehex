@@ -1,7 +1,7 @@
 import * as BABYLON from "babylonjs";
 import * as HexTools from "hex-tools";
 
-import { BiomeMap, TerraformTools } from "gameComponents";
+import { BiomeMap, TerraformTools } from "GameWorld/gameComponents";
 import AssetsManager from "./AssetsManager";
 import Camera from "./Camera";
 // import { DB32 } from "./Tools/Palette";

@@ -1,8 +1,8 @@
-import { ITileTexture } from "gameComponents";
+import { ITileTexture } from "GameWorld/gameComponents";
 
 export const GroundTexture: ITileTexture[] = [
   {
-    path: require("../../../../../assets/textures/Ground.png") as string,
+    path: require("../../../../../../assets/textures/Ground.png") as string,
     weight: 0,
   },
   // {

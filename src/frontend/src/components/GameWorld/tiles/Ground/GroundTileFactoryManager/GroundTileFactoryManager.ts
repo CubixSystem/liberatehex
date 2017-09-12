@@ -1,6 +1,6 @@
 import * as BABYLON from "babylonjs";
 
-import { Biome, ITileFactoryManager, TileDirection } from "gameComponents";
+import { Biome, ITileFactoryManager, TileDirection } from "GameWorld/gameComponents";
 import { GroundTexture, GroundTileFactory, GroundTileShape } from "../";
 
 export interface ITileFactoryManagerParams {
@@ -25,8 +25,8 @@ export class GroundTileFactoryManager implements ITileFactoryManager {
       }));
   }
 
-  public getTile(params: { type: GroundTileShape, direction: TileDirection, biome: Biome }) {
-    return this.getBiomeFactory(params.biome).getTile(params.type, params.direction);
+  public getTile(params: { shape: GroundTileShape, direction: TileDirection, biome: Biome }) {
+    return this.getBiomeFactory(params.biome).getTile(params.shape, params.direction);
   }
 
   protected getBiomeFactory(biome: Biome) {

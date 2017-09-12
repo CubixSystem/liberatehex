@@ -5,9 +5,9 @@ import {
   Biome,
   ITileTexture,
   TileDirection,
-} from "@gameComponents";
-import { GroundTile, TileType } from "@tiles";
-import * as Tools from "@tools";
+} from "GameWorld/gameComponents";
+import { GroundTile, TileType } from "GameWorld/tiles";
+import * as Tools from "GameWorld/Tools";
 
 export interface IGroundTileFactoryParams {
   scene: BABYLON.Scene;

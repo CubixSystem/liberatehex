@@ -1,7 +1,7 @@
 import * as HexTools from "hex-tools";
 
-import { BiomeMap, BiomeTile, TileDirection } from "@gameComponents";
-import { GroundTileShape } from "@tiles";
+import { BiomeMap, BiomeTile, TileDirection } from "GameWorld/gameComponents";
+import { GroundTileShape } from "GameWorld/tiles";
 
 export class TerraformTools {
   public static elevateTile(position: (HexTools.AxialVector | HexTools.CubeVector), map: BiomeMap) {
@@ -16,18 +16,18 @@ export class TerraformTools {
       direction: TileDirection.NORTH,
       height: ++targetTile.height,
       position: targetTile.axialPosition,
-      type: GroundTileShape.GROUND_PLANE,
+      shape: GroundTileShape.GROUND_PLANE,
     });
 
     neighbors.forEach((neighborTile) => {
       const vector = targetTile.cubePosition.subtract(neighborTile.cubePosition);
-      const replaceNeighborTile = (direction: TileDirection, type: GroundTileShape) => {
+      const replaceNeighborTile = (direction: TileDirection, shape: GroundTileShape) => {
         map.replaceTile({
           biome: neighborTile.biome,
           direction,
           height: neighborTile.height,
           position: neighborTile.axialPosition,
-          type,
+          shape,
         });
       };
 
@@ -63,7 +63,7 @@ export class TerraformTools {
             direction: neighborDirection,
             height: neighborTile.height,
             position: neighborTile.axialPosition,
-            type: GroundTileShape.GROUND_SLOPE_UP,
+            shape: GroundTileShape.GROUND_SLOPE_UP,
           });
         } else if (neighborTile.shape === GroundTileShape.GROUND_SLOPE_UP) {
           HexTools.PointyTopDirectionVector.forEach((directionVector, direction) => {

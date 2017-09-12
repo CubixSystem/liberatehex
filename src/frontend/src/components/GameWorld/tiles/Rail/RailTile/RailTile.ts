@@ -1,4 +1,4 @@
-import { BiomeTile, IBiomeTileParams } from "gameComponents";
+import { BiomeTile, IBiomeTileParams } from "GameWorld/gameComponents";
 
 // export interface IRailTileParams extends IBiomeTileParams {}
 
